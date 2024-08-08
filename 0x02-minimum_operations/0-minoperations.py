@@ -10,17 +10,22 @@ If n is impossible to achieve, return 0
 """
 
 
-def minOperations(b):
-    """Calculates the fewest number of operations needed to result
-    in exactly n H characters in the """
-    n = len(b)
-    seen_boxes = set([0])
-    unseen_boxes = set(b[0]).difference(set([0]))
-    while len(unseen_boxes) > 0:
-        boxIdx = unseen_boxes.pop()
-        if not boxIdx or boxIdx >= n or boxIdx < 0:
-            continue
-        if boxIdx not in seen_boxes:
-            unseen_boxes = unseen_boxes.union(b[boxIdx])
-            seen_boxes.add(boxIdx)
-    return n == len(seen_boxes)
+def minOperations(n):
+    """Calculates the fewest number of operations needed to result in exactly n H"""
+    if n <= 1:
+        return 0
+
+    min_ops = float('inf')
+
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            factor1 = i
+            factor2 = n // i
+
+            operations = factor1 - 1 + factor2 - 1
+            min_ops = min(min_ops, operations)
+
+            operations = factor2 - 1 + factor1 - 1
+            min_ops = min(min_ops, operations)
+
+    return min_ops if min_ops != float('inf') else 0
