@@ -3,7 +3,7 @@
 0x07. Rotate 2D Matrix
 """
 
-def rotate_matrix_90_degrees(matrix):
+def rotate_2d_matrix(matrix):
     """Rotate a 2D matrix 90 degrees clockwise.
     """
     size = len(matrix)
