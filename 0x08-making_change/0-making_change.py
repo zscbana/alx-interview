@@ -1,19 +1,24 @@
 #!/usr/bin/python3
-"""Contains the calculate_min_coins function."""
+
+""" Contains makeChange function"""
 
 
-def calculate_min_coins(coin_denominations, target_amount):
-    """Returns the fewest number of coins needed to meet the target amount."""
-    if not coin_denominations:
+def makeChange(coins, sum):
+    """
+    Returns: fewest number of coins needed to meet sum
+        If total is 0 or less, return 0
+        If total cannot be met by any number of coins you have, return -1
+    """
+    if not coins or coins is None:
         return -1
-    if target_amount <= 0:
+    if sum <= 0:
         return 0
-    min_coins = 0
-    sorted_coins = sorted(coin_denominations, reverse=True)
-    for coin in sorted_coins:
-        while coin <= target_amount:
-            target_amount -= coin
-            min_coins += 1
-        if target_amount == 0:
-            return min_coins
+    change = 0
+    coins = sorted(coins)[::-1]
+    for coin in coins:
+        while coin <= sum:
+            sum -= coin
+            change += 1
+        if (sum == 0):
+            return change
     return -1
